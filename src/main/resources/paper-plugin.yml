@@ -1,0 +1,11 @@
+name: Mines
+version: '1.0.0'
+main: dev.mending.mines.Mines
+api-version: '1.21'
+authors: [ MrMending ]
+website: https://mending.dev
+dependencies: 
+  server: 
+    MendingCore:
+      required: true
+      load: BEFORE
