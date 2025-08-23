@@ -1,5 +1,6 @@
 package dev.mending.mines.mine;
 
+import dev.mending.mines.data.Defaults;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -19,7 +20,7 @@ public class Mine extends MineCuboid {
     private List<MineContent> content;
     private Location teleportLocation;
 
-    private long resetInterval;
+    private long resetInterval = Defaults.INTERVAL;
     private long nextResetTime;
 
     public Mine(String name, Location pos1, Location pos2) {

@@ -1,6 +1,7 @@
 package dev.mending.mines.mine;
 
 import com.google.gson.*;
+import dev.mending.mines.data.Defaults;
 import org.bukkit.Location;
 
 import java.lang.reflect.Type;
@@ -49,7 +50,7 @@ public class MineAdapter implements JsonSerializer<Mine>, JsonDeserializer<Mine>
 
         // Meta
         String displayName = obj.has("displayName") ? obj.get("displayName").getAsString() : null;
-        long resetInterval = obj.has("resetInterval") ? obj.get("resetInterval").getAsLong() : 60;
+        long resetInterval = obj.has("resetInterval") ? obj.get("resetInterval").getAsLong() : Defaults.INTERVAL;
 
         // Content
         List<MineContent> content = new ArrayList<>();
