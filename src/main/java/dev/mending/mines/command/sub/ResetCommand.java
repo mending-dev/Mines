@@ -3,6 +3,7 @@ package dev.mending.mines.command.sub;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import dev.mending.core.paper.api.language.Lang;
 import dev.mending.mines.Mines;
 import dev.mending.mines.command.ICommand;
 import dev.mending.mines.mine.Mine;
@@ -17,18 +18,15 @@ public class ResetCommand implements ICommand {
         this.plugin = plugin;
     }
 
-    // TODO: Custom Messages
-
     @Override
     public LiteralCommandNode<CommandSourceStack> get() {
         return Commands.literal("reset")
             .then(Commands.literal("all")
                 .executes(ctx -> {
-                    ctx.getSource().getSender().sendRichMessage("<green>Reset all mines ...");
                     plugin.getMineManager().getMines().forEach((name, mine) -> {
                         mine.reset();
                     });
-                    ctx.getSource().getSender().sendRichMessage("<green>Success!");
+                    ctx.getSource().getSender().sendMessage(plugin.getLanguage().get("resetAll"));
                     return Command.SINGLE_SUCCESS;
                 })
             )
@@ -39,13 +37,12 @@ public class ResetCommand implements ICommand {
                     final Mine mine = plugin.getMineManager().getMines().get(name);
 
                     if (mine == null) {
-                        ctx.getSource().getSender().sendRichMessage("<red>Mine '" + name + "' does not exists!");
+                        ctx.getSource().getSender().sendMessage(plugin.getLanguage().get("notFound").replaceText(Lang.replace("%name%", name)));
                         return Command.SINGLE_SUCCESS;
                     }
 
-                    ctx.getSource().getSender().sendRichMessage("<green>Reset '" + name + "' ...");
                     mine.reset();
-                    ctx.getSource().getSender().sendRichMessage("<green>Success!");
+                    ctx.getSource().getSender().sendMessage(plugin.getLanguage().get("resetSingle").replaceText(Lang.replace("%name%", name)));
                     return Command.SINGLE_SUCCESS;
                 })
             )

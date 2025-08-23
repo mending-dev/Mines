@@ -22,7 +22,7 @@ public class ReloadCommand implements ICommand {
             .executes(ctx -> {
                 plugin.getMineManager().reload();
                 plugin.getLanguage().reload();
-                ctx.getSource().getSender().sendRichMessage("<green>Configuration reloaded"); // TODO: Custom Message
+                ctx.getSource().getSender().sendMessage(plugin.getLanguage().get("reloaded"));
                 return Command.SINGLE_SUCCESS;
             })
             .build();

@@ -1,1 +1,15 @@
-{}
+{
+  "prefix": "<dark_gray>[<gold><bold>Mines</bold><dark_gray>]",
+  "messages": {
+    "reloaded": "<prefix> <gray>Configuration has been reloaded.",
+    "resetSingle": "<prefix> <gray>Mine <yellow>%name% <gray>has been resetted.",
+    "resetAll": "<prefix> <gray>All mines has been resetted.",
+    "notFound": "<prefix> <gray>Mine <red>%name% <gray>not found.",
+    "wandReceived": "<prefix> <gray>Wand received.",
+    "saved": "<prefix> <gray>Mine <yellow>%name% <gray>has been saved.",
+    "positionSet": "<prefix> <gray>Position <yellow>%pos% <gray>has been set.",
+    "noPositionsFound": "<prefix> <red>You need to set the positions using the wand.",
+    "listEmpty": "<prefix> <gray>No mines saved.",
+    "list": "<prefix> <gray>List of all mines: <yellow>%names%"
+  }
+}

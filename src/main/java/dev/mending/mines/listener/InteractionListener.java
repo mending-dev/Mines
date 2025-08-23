@@ -1,5 +1,6 @@
 package dev.mending.mines.listener;
 
+import dev.mending.core.paper.api.language.Lang;
 import dev.mending.mines.Mines;
 import dev.mending.mines.data.Item;
 import org.bukkit.Material;
@@ -29,12 +30,12 @@ public class InteractionListener implements Listener {
                     case LEFT_CLICK_BLOCK -> {
                         e.setCancelled(true);
                         plugin.getSelectionCache().setPos1(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
-                        e.getPlayer().sendRichMessage("<green>Position 1 has been set"); // TODO: Custom Message
+                        e.getPlayer().sendMessage(plugin.getLanguage().get("positionSet").replaceText(Lang.replace("%pos%", "1")));
                     }
                     case RIGHT_CLICK_BLOCK -> {
                         e.setCancelled(true);
                         plugin.getSelectionCache().setPos2(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
-                        e.getPlayer().sendRichMessage("<green>Position 2 has been set"); // TODO: Custom Message
+                        e.getPlayer().sendMessage(plugin.getLanguage().get("positionSet").replaceText(Lang.replace("%pos%", "2")));
                     }
                 }
             }

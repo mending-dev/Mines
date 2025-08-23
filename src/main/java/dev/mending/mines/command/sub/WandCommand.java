@@ -24,6 +24,7 @@ public class WandCommand implements ICommand {
             .executes(ctx -> {
                 if (ctx.getSource().getSender() instanceof Player player) {
                     player.getInventory().addItem(Item.WAND);
+                    player.sendMessage(plugin.getLanguage().get("wandReceived"));
                 }
                 return Command.SINGLE_SUCCESS;
             })

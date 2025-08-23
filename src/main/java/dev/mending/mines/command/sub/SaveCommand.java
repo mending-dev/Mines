@@ -3,6 +3,7 @@ package dev.mending.mines.command.sub;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import dev.mending.core.paper.api.language.Lang;
 import dev.mending.mines.Mines;
 import dev.mending.mines.command.ICommand;
 import dev.mending.mines.mine.Mine;
@@ -31,7 +32,7 @@ public class SaveCommand implements ICommand {
                         final Selection selection = plugin.getSelectionCache().get(player.getUniqueId());
 
                         if (!selection.isValid()) {
-                            player.sendRichMessage("<red>You need to set the positions using the wand."); // TODO: Custom message
+                            player.sendMessage(plugin.getLanguage().get("noPositionsFound"));
                             return Command.SINGLE_SUCCESS;
                         }
 
@@ -39,7 +40,7 @@ public class SaveCommand implements ICommand {
 
                         plugin.getMineManager().getMines().put(name, mine);
                         plugin.getMineManager().save();
-                        player.sendRichMessage("<green>Region '" + name + "' saved"); // TODO: Custom message
+                        player.sendMessage(plugin.getLanguage().get("saved").replaceText(Lang.replace("%name%", name)));
                     }
                     return Command.SINGLE_SUCCESS;
                 })
