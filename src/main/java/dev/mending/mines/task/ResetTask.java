@@ -1,13 +1,14 @@
-package dev.mending.mines.mine;
+package dev.mending.mines.task;
 
 import dev.mending.mines.Mines;
+import dev.mending.mines.mine.Mine;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class MineTask extends BukkitRunnable {
+public class ResetTask extends BukkitRunnable {
 
     private final Mines plugin;
 
-    public MineTask(Mines plugin) {
+    public ResetTask(Mines plugin) {
         this.plugin = plugin;
     }
 

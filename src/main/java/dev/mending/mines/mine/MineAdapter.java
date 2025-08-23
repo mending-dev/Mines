@@ -17,12 +17,7 @@ public class MineAdapter implements JsonSerializer<Mine>, JsonDeserializer<Mine>
 
         // Meta
         obj.addProperty("displayName", mine.getDisplayName());
-
-        // Positions
-        JsonObject positions = new JsonObject();
-        positions.add(String.valueOf(1), context.serialize(mine.getPos1()));
-        positions.add(String.valueOf(2), context.serialize(mine.getPos2()));
-        obj.add("positions", positions);
+        obj.addProperty("resetInterval", mine.getResetInterval());
 
         // Content
         JsonArray contentArray = new JsonArray();
@@ -33,6 +28,15 @@ public class MineAdapter implements JsonSerializer<Mine>, JsonDeserializer<Mine>
             contentArray.add(contentObj);
         }
         obj.add("content", contentArray);
+
+        // Positions
+        JsonObject positions = new JsonObject();
+        positions.add(String.valueOf(1), context.serialize(mine.getPos1()));
+        positions.add(String.valueOf(2), context.serialize(mine.getPos2()));
+        obj.add("positions", positions);
+
+        // Teleport Location
+        obj.add("teleportLocation", context.serialize(mine.getTeleportLocation()));
 
         // Result
         return obj;
@@ -45,15 +49,7 @@ public class MineAdapter implements JsonSerializer<Mine>, JsonDeserializer<Mine>
 
         // Meta
         String displayName = obj.has("displayName") ? obj.get("displayName").getAsString() : null;
-
-        // Positions
-        List<Location> positions = new ArrayList<>();
-        JsonObject posObj = obj.getAsJsonObject("positions");
-
-        for (Map.Entry<String, JsonElement> entry : posObj.entrySet()) {
-            Location loc = context.deserialize(entry.getValue(), Location.class);
-            positions.add(loc);
-        }
+        long resetInterval = obj.has("resetInterval") ? obj.get("resetInterval").getAsLong() : 60;
 
         // Content
         List<MineContent> content = new ArrayList<>();
@@ -67,12 +63,26 @@ public class MineAdapter implements JsonSerializer<Mine>, JsonDeserializer<Mine>
             }
         }
 
+        // Positions
+        List<Location> positions = new ArrayList<>();
+        JsonObject posObj = obj.getAsJsonObject("positions");
+
+        for (Map.Entry<String, JsonElement> entry : posObj.entrySet()) {
+            Location loc = context.deserialize(entry.getValue(), Location.class);
+            positions.add(loc);
+        }
+
+        // Teleport Location
+        Location teleportLocation = obj.has("teleportLocation") ? context.deserialize(obj.get("teleportLocation"), Location.class) : null;
+
         // Result
 
         Mine mine = new Mine(null, positions.getFirst(), positions.getLast());
 
         mine.setDisplayName(displayName);
+        mine.setResetInterval(resetInterval);
         mine.setContent(content);
+        mine.setTeleportLocation(teleportLocation);
 
         return mine;
     }

@@ -17,8 +17,9 @@ public class Mine extends MineCuboid {
     private String name;
     private String displayName;
     private List<MineContent> content;
+    private Location teleportLocation;
 
-    private long resetInterval = 60; // TODO: Load from config
+    private long resetInterval;
     private long nextResetTime;
 
     public Mine(String name, Location pos1, Location pos2) {
@@ -55,10 +56,12 @@ public class Mine extends MineCuboid {
 
         }
 
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            if (contains(player)) {
-                // TODO: Teleport player to backup location
-            }
-        });
+        if (teleportLocation != null) {
+            Bukkit.getOnlinePlayers().forEach(player -> {
+                if (contains(player)) {
+                    player.teleport(teleportLocation);
+                }
+            });
+        }
     }
 }

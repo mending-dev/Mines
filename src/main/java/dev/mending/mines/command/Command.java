@@ -23,6 +23,7 @@ public class Command implements ICommand {
             .then(new SaveCommand(plugin).get())
             .then(new ListCommand(plugin).get())
             .then(new ResetCommand(plugin).get())
+            .then(new SetLocationCommand(plugin).get())
             .build();
     }
 }
