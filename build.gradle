@@ -15,11 +15,16 @@ repositories {
     maven {
         url = "https://repo.mending.dev/snapshots"
     }
+    maven {
+        url = 'https://repo.extendedclip.com/releases/'
+    }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     compileOnly("dev.mending.core:paper-api:1.0.0-SNAPSHOT")
+
+    compileOnly("me.clip:placeholderapi:2.11.6")
 
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")

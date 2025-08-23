@@ -9,3 +9,6 @@ dependencies:
     MendingCore:
       required: true
       load: BEFORE
+    PlaceholderAPI:
+      required: false
+      load: BEFORE

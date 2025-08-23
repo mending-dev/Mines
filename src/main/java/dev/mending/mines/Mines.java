@@ -2,6 +2,7 @@ package dev.mending.mines;
 
 import dev.mending.core.paper.api.language.json.Language;
 import dev.mending.mines.command.Command;
+import dev.mending.mines.expansion.PAPIExpansion;
 import dev.mending.mines.listener.InteractionListener;
 import dev.mending.mines.task.ResetTask;
 import dev.mending.mines.selection.SelectionCache;
@@ -32,6 +33,10 @@ public final class Mines extends JavaPlugin {
 
         registerEvents(getServer().getPluginManager());
         registerCommands();
+
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PAPIExpansion(this).register();
+        }
     }
 
     @Override
