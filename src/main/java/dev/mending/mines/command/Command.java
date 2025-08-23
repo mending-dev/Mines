@@ -3,8 +3,10 @@ package dev.mending.mines.command;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import dev.mending.mines.Mines;
 import dev.mending.mines.command.sub.*;
+import dev.mending.mines.gui.MainGui;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
+import org.bukkit.entity.Player;
 
 public class Command implements ICommand {
 
@@ -17,6 +19,12 @@ public class Command implements ICommand {
     @Override
     public LiteralCommandNode<CommandSourceStack> get() {
         return Commands.literal("mines")
+            .executes(ctx -> {
+                if (ctx.getSource().getSender() instanceof Player player) {
+                    new MainGui(plugin).open(player);
+                }
+                return 1;
+            })
             .requires(sender -> sender.getSender().hasPermission("mines.command"))
             .then(new ReloadCommand(plugin).get())
             .then(new WandCommand(plugin).get())

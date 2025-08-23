@@ -8,6 +8,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import dev.mending.core.paper.api.language.Lang;
 import dev.mending.mines.Mines;
 import dev.mending.mines.command.ICommand;
+import dev.mending.mines.gui.ContentGui;
 import dev.mending.mines.mine.Mine;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
@@ -85,10 +86,7 @@ public class SetCommand implements ICommand {
                                 return Command.SINGLE_SUCCESS;
                             }
 
-                            // TODO: Open Content Edit-Gui
-
-                            plugin.getMineManager().save();
-                            player.sendMessage(plugin.getLanguage().get("contentSet").replaceText(Lang.replace("%name%", name)));
+                            new ContentGui(plugin, name, null).open(player);
                         }
                         return Command.SINGLE_SUCCESS;
                     })
