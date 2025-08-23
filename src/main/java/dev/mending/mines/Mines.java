@@ -3,6 +3,7 @@ package dev.mending.mines;
 import dev.mending.core.paper.api.language.json.Language;
 import dev.mending.mines.command.Command;
 import dev.mending.mines.listener.InteractionListener;
+import dev.mending.mines.mine.MineTask;
 import dev.mending.mines.selection.SelectionCache;
 import dev.mending.mines.mine.MineManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
@@ -18,11 +19,16 @@ public final class Mines extends JavaPlugin {
 
     private final SelectionCache selectionCache = new SelectionCache();
 
+    private MineTask mineTask;
+
     @Override
     public void onEnable() {
 
         this.language.init();
         this.mineManager.init();
+
+        this.mineTask = new MineTask(this);
+        this.mineTask.runTaskTimer(this, 20L, 20L);
 
         registerEvents(getServer().getPluginManager());
         registerCommands();
