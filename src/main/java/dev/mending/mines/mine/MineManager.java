@@ -53,6 +53,7 @@ public class MineManager extends Configuration {
 
     @Override
     public void onPreSave(JsonObject json) {
+        json.entrySet().clear();
         mines.forEach((name, mine) -> {
             for (Map.Entry<String, Mine> entry : mines.entrySet()) {
                 json.add(entry.getKey(), gson.toJsonTree(entry.getValue(), Mine.class));

@@ -21,9 +21,10 @@ public class Command implements ICommand {
             .then(new ReloadCommand(plugin).get())
             .then(new WandCommand(plugin).get())
             .then(new SaveCommand(plugin).get())
+            .then(new DeleteCommand(plugin).get())
             .then(new ListCommand(plugin).get())
             .then(new ResetCommand(plugin).get())
-            .then(new SetLocationCommand(plugin).get())
+            .then(new SetCommand(plugin).get())
             .build();
     }
 }
