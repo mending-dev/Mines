@@ -32,7 +32,7 @@ public class MineAdapter implements JsonSerializer<Mine>, JsonDeserializer<Mine>
             contentObj.addProperty("chance", content.getChance());
             contentArray.add(contentObj);
         }
-        obj.add("contents", contentArray);
+        obj.add("content", contentArray);
 
         // Result
         return obj;
