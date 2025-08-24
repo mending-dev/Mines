@@ -3,7 +3,6 @@ package dev.mending.mines.gui;
 import dev.mending.core.paper.api.gui.Gui;
 import dev.mending.core.paper.api.gui.GuiIcon;
 import dev.mending.core.paper.api.item.ItemBuilder;
-import dev.mending.core.paper.api.item.SkullBuilder;
 import dev.mending.core.paper.api.language.Lang;
 import dev.mending.mines.Mines;
 import dev.mending.mines.data.Item;

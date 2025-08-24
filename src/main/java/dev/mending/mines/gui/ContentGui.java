@@ -108,7 +108,6 @@ public class ContentGui extends Gui {
 
     private void save() {
         plugin.getMineManager().save();
-        player.sendMessage(plugin.getLanguage().get("contentSet").replaceText(Lang.replace("%name%", name)));
     }
 
     private boolean isEmpty() {
