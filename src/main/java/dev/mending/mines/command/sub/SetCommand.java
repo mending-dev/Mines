@@ -28,7 +28,7 @@ public class SetCommand implements ICommand {
             .requires(sender -> sender.getSender().hasPermission("mines.command.set"))
             .then(Commands.literal("interval")
                 .then(Commands.argument("name", StringArgumentType.word())
-                    .then(Commands.argument("seconds", LongArgumentType.longArg())
+                    .then(Commands.argument("seconds", LongArgumentType.longArg(1))
                         .executes(ctx -> {
 
                             final String name = ctx.getArgument("name", String.class);
@@ -42,9 +42,10 @@ public class SetCommand implements ICommand {
 
                             mine.setResetInterval(seconds);
                             plugin.getMineManager().save();
+                            plugin.getMineManager().reload();
                             ctx.getSource().getSender().sendMessage(plugin.getLanguage().get("intervalSet")
-                                    .replaceText(Lang.replace("%name%", name))
-                                    .replaceText(Lang.replace("%interval%", "" + seconds))
+                                .replaceText(Lang.replace("%name%", name))
+                                .replaceText(Lang.replace("%interval%", "" + seconds))
                             );
 
                             return Command.SINGLE_SUCCESS;

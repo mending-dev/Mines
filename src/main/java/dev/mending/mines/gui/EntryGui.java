@@ -39,12 +39,13 @@ public class EntryGui extends Gui {
             initialContent = content;
             itemBuilder = new ItemBuilder(initialContent.getBlockData().getMaterial());
         } else {
-            itemBuilder = new ItemBuilder(Material.BARRIER).setName(Lang.deserialize("<red>Drag your item here"));
+            itemBuilder = new ItemBuilder(Material.BARRIER).setName(Lang.deserialize("<red>Drag your block here"));
         }
 
         fill(new GuiIcon(Item.PLACEHOLDER));
 
         getActionSlotManager().register(13, itemBuilder)
+            .onPrePutClick(((clickEvent, itemStack) -> !itemStack.getType().isBlock()))
             .onPrePickupClick((clickEvent, itemStack) -> index == -1 ? itemStack.getType() == Material.BARRIER : itemStack.getType().equals(initialContent.getBlockData().getMaterial()))
             .onPut((clickEvent, itemStack) -> {
                 this.content = new MineContent(itemStack.getType().toString(), 100);
