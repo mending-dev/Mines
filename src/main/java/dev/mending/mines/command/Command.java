@@ -19,13 +19,13 @@ public class Command implements ICommand {
     @Override
     public LiteralCommandNode<CommandSourceStack> get() {
         return Commands.literal("mines")
+            .requires(sender -> sender.getSender().hasPermission("mines.command"))
             .executes(ctx -> {
                 if (ctx.getSource().getSender() instanceof Player player) {
                     new MainGui(plugin).open(player);
                 }
                 return 1;
             })
-            .requires(sender -> sender.getSender().hasPermission("mines.command"))
             .then(new ReloadCommand(plugin).get())
             .then(new WandCommand(plugin).get())
             .then(new SaveCommand(plugin).get())

@@ -2,6 +2,7 @@ package dev.mending.mines.mine;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.mending.core.paper.api.config.json.Configuration;
 import dev.mending.core.paper.api.config.json.adapter.ItemStackAdapter;
@@ -43,7 +44,7 @@ public class MineManager extends Configuration {
 
         this.mines.clear();
 
-        for (Map.Entry<String, com.google.gson.JsonElement> entry : json.entrySet()) {
+        for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
             String name = entry.getKey();
             Mine mine = gson.fromJson(entry.getValue(), Mine.class);
             mine.setName(name);
